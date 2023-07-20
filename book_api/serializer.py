@@ -22,9 +22,20 @@
 
 from rest_framework import serializers
 from book_api.models import Book
+from django.forms import ValidationError
 
 
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model=Book
         fields="__all__"
+
+    def validate_title(self, value):
+        if value=="Diet Coke":
+            raise ValidationError("No Diet Coke please")
+        return value
+    
+    def validate(self, data):
+        if data["number_of_pages"]>500 and data["quantity"]>200:
+            raise ValidationError("Too heay for inventory")
+        return data

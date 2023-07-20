@@ -69,7 +69,7 @@ class BookCreate(APIView):
 class BookById(APIView):
     def get_book_by_pk(self,pk):
         try: # Python Data Structure
-            books=Book.objects.get(pk=pk) #Complex Data
+            return Book.objects.get(pk=pk) #Complex Data
         except:
             return Response({"error":"Book does not exist"},status=status.HTTP_404_NOT_FOUND)
         
